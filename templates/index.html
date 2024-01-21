@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Vehicle Classification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('../static/jjd.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .navbar {
+            width: 85%;
+            margin: auto;
+            padding: 35px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 120px;
+            cursor: pointer;
+        }
+
+        .navbar ul li {
+            list-style: none;
+            display: inline-block;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar ul li::after {
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #009688;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            transition: 0.5s;
+        }
+
+        .navbar ul li:hover::after {
+            width: 100%;
+        }
+
+        .content {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .content h1 {
+            font-size: 45px;
+            margin-top: 80px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        .content p {
+            margin: 20px auto;
+            font-weight: 100;
+            line-height: 25px;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap; /* Added to allow wrapping on smaller screens */
+        }
+
+        .feature-input {
+            width: 150px; /* Adjusted width for better visibility */
+            text-align: center;
+            margin: 0 10px;
+            border-radius: 5px;
+            border: 1px solid #009688;
+            padding: 5px;
+            margin-bottom: 10px; /* Added margin at the bottom for better spacing */
+        }
+
+        .submit-button {
+            width: 200px;
+            padding: 15px 0;
+            text-align: center;
+            margin: 20px 10px;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid #009688;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #009688;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <img src="{{ url_for('static', filename='loggo.png') }}" alt="Mon image" height="50" width="70">
+            <ul>
+                <li><a href="{{ url_for('index') }}">Welcome</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <h1 style="color: #2EBEB4">Vehicle Classification</h1>
+        <p>Classify your vehicle using the following features:</p>
+
+        <form action="/predict" method="post" class="input-container">
+            <div class="input-row">
+                <label for="COMPACTNESS" class="feature-input-label">Compactness:</label>
+                <input type="text" id="COMPACTNESS" name="COMPACTNESS" class="feature-input" required>
+            </div>
+
+            <div class="input-row">
+                <label for="MAX.LENGTH_ASPECT_RATIO" class="feature-input-label">Max length a:ratio:</label>
+                <input type="text" id="MAX.LENGTH_ASPECT_RATIO" name="MAX.LENGTH_ASPECT_RATIO" class="feature-input" required>
+            </div>
+
+            <div class="input-row">
+                <label for="SCALED_VARIANCE_MINOR" class="feature-input-label">Scaled variance minor:</label>
+                <input type="text" id="SCALED_VARIANCE_MINOR" name="SCALED_VARIANCE_MINOR" class="feature-input" required>
+            </div>
+
+            <div class="input-row">
+                <label for="MAX.LENGTH_RECTANGULARITY" class="feature-input-label">Max length rectangularity:</label>
+                <input type="text" id="MAX.LENGTH_RECTANGULARITY" name="MAX.LENGTH_RECTANGULARITY" class="feature-input" required>
+            </div>
+
+            <!-- Add more input rows as needed -->
+
+            <button type="submit" class="submit-button">Classify Vehicle</button>
+        </form>
+    </div>
+</body>
+</html>
